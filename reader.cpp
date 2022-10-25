@@ -12,7 +12,7 @@ enum class sort_order{
 typedef struct PB{
     std::string name;
     std::string surname;
-    std::string p_number;    
+    std::string p_number;
 } PB;
 
 bool by_name(PB a, PB b){
@@ -33,9 +33,9 @@ int main(int argc, char* argv[]){
         std::cout << "Usage:\nreader <path> <sort_option>\n\n";
         std::cout << "path - absolute file path to the file to be read\n";
         std::cout << "sort options:\n";
-        std::cout << "1 / name - sort by name:\n";
-        std::cout << "2 / surename - sort by surname:\n";
-        std::cout << "3 / phone - sort by phone number:\n";
+        std::cout << "1 / name - sort by name(default)\n";
+        std::cout << "2 / surename - sort by surname\n";
+        std::cout << "3 / phone - sort by phone number\n";
         return 0;
     }
     std::string path = argv[1];
@@ -53,11 +53,11 @@ int main(int argc, char* argv[]){
     while(!fs.eof()){
     	std::string name, surname, phone;
     	fs >> surname >> name >> phone;
-    	
+        name.pop_back();
     	lst.push_back({name, surname, phone});
     }
     std::sort(lst.begin(), lst.end(), by_phone);
     for(auto x : lst){
-    	std::cout << x.name << " " << x.surname << " " << x.p_number << std::endl;
+    	std::cout << x.name << " " << x.surname << ": " << x.p_number << std::endl;
     }
 }
